@@ -1,10 +1,20 @@
-const planets = require("./planets.json");
+const axios = require("axios")
 
-module.exports = {
+  
+  module.exports = {
     list: async () => {
-        return planets
+      const { data } = await axios.get("http://database:8004/Planets");
+      return data;
     },
-    create: async() => {
-        throw Error("Error al crear el planeta");
-    }
-}
+    create: async (planet) => {
+      // throw new Error("DB ERROR: Method not implemented");
+      const { data } = await axios.post("http://database:8004/Planets",planet);
+      return data;
+    },
+    get: async(id) =>{
+      const { data } = await axios.get(`http://database:8004/Planets/${id}`);
+      return data
+    },
+    
+  }
+  

@@ -6,18 +6,22 @@ const app = express();
 app.use(morgan("dev"));
 
 app.use("/characters", createProxyMiddleware({
-    target: "http://localhost:8001",
+    target: "http://localhost:8001/",
     changeOrigin: true,
 }));
 
 app.use("/films", createProxyMiddleware({
-    target: "http://localhost:8002",
+    target: "http://localhost:8002/",
     changeOrigin: true,
 }));
 app.use("/planets", createProxyMiddleware({
-    target: "http://localhost:8003",
+    target: "http://localhost:8003/",
     changeOrigin: true,
 }));
+app.use("/database", createProxyMiddleware({
+    target:"http://database:8004/",
+    changeOrigin:true
+}))
 
 
 app.listen(8000, () => {
